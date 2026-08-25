@@ -1,6 +1,10 @@
 # ql-rename
 批量重命名文件
 
+Event Name 在 frontend/src/events.gen.ts 中定义
+然后执行 go generate ./backend 生成前端用的事件定义events.gen.ts
+
+
 ## About
 
 This is the official Wails Vue-TS template.
