@@ -4,8 +4,15 @@ import "path"
 
 // SetRules 设置重命名规则
 func (a *App) SetRules(rules *Rules) {
+	if rules == nil {
+		return
+	}
 	a.rules = rules
 	a.updatePreview()
+}
+
+func (a *App) GetRules() *Rules {
+	return a.rules
 }
 
 // ExecsRename 执行重命名
@@ -23,8 +30,8 @@ func (a *App) updatePreview() {
 	}
 	a.fileIndex = 0
 	for i := range a.preview {
-		a.preview[i].newName = a.getNewFileName(a.preview[i].oldName)
-		a.preview[i].newDisPlayName = path.Base(a.preview[i].newName)
+		a.preview[i].NewName = a.getNewFileName(a.preview[i].OldName)
+		a.preview[i].NewDisPlayName = path.Base(a.preview[i].NewName)
 	}
 	a.fileIndex = 0
 }

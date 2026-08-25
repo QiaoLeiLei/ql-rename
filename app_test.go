@@ -9,8 +9,8 @@ func TestApp_GetPreview(t *testing.T) {
 	app.setFiles("/Users/qiaoleilei/Downloads/images")
 	app.setPreview()
 	app.SetRules(&Rules{
-		renameType: AddNumber,
-		numberObj: &NumberObj{
+		RenameType: AddNumber,
+		NumberObj: &NumberObj{
 			NewName: "my_image",
 			Suffix:  underLine,
 		},

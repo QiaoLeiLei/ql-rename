@@ -37,17 +37,17 @@ type NumberObj struct {
 }
 
 type Rules struct {
-	renameType RenameType
-	prefix     string
-	suffix     string
-	replaceObj *ReplaceObj
-	numberObj  *NumberObj
+	RenameType RenameType
+	Prefix     string
+	Suffix     string
+	ReplaceObj *ReplaceObj
+	NumberObj  *NumberObj
 }
 type RenamePreview struct {
-	oldDisPlayName string
-	newDisPlayName string
-	oldName        string
-	newName        string
+	OldDisPlayName string
+	NewDisPlayName string
+	OldName        string
+	NewName        string
 }
 
 // App struct
@@ -71,14 +71,14 @@ func (a *App) startup(ctx context.Context) {
 func NewApp() *App {
 	return &App{
 		rules: &Rules{
-			renameType: ToUpperCase,
-			prefix:     "",
-			suffix:     "",
-			replaceObj: &ReplaceObj{
+			RenameType: ToUpperCase,
+			Prefix:     "",
+			Suffix:     "",
+			ReplaceObj: &ReplaceObj{
 				OldStr: "",
 				NewStr: "",
 			},
-			numberObj: &NumberObj{
+			NumberObj: &NumberObj{
 				NewName: "新名字",
 				Suffix:  bracket,
 			},

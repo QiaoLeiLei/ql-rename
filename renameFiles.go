@@ -18,8 +18,8 @@ func (a *App) renameFiles() error {
 		go func(idx int) {
 			defer a.wg.Done()
 
-			oldName := a.preview[idx].oldName
-			newName := a.preview[idx].newName
+			oldName := a.preview[idx].OldName
+			newName := a.preview[idx].NewName
 
 			if err := os.Rename(oldName, newName); err != nil {
 				errChan <- fmt.Errorf("重命名文件 %s -> %s 失败: %w", oldName, newName, err)
@@ -120,15 +120,15 @@ func (a *App) deleteFileSpecialChars(filePath string) string {
 // getNewFileName 获取新的文件名
 func (a *App) getNewFileName(filePath string) string {
 	rules := a.rules
-	switch rules.renameType {
+	switch rules.RenameType {
 	case AddPrefix:
-		return a.addFilePrefix(filePath, rules.prefix)
+		return a.addFilePrefix(filePath, rules.Prefix)
 	case AddSuffix:
-		return a.addFileSuffix(filePath, rules.suffix)
+		return a.addFileSuffix(filePath, rules.Suffix)
 	case ReplaceStr:
-		return a.replaceFileStr(filePath, rules.replaceObj)
+		return a.replaceFileStr(filePath, rules.ReplaceObj)
 	case AddNumber:
-		return a.addFileNumber(filePath, rules.numberObj)
+		return a.addFileNumber(filePath, rules.NumberObj)
 	case ToUpperCase:
 		return a.fileToUpperCase(filePath)
 	case ToLowerCase:
