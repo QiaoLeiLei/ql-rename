@@ -3,6 +3,8 @@ package main
 import (
 	"context"
 	"fmt"
+	"github.com/wailsapp/wails/v2/pkg/runtime"
+	"os"
 	"sync"
 )
 
@@ -66,6 +68,26 @@ type App struct {
 // so we can call the runtime methods
 func (a *App) startup(ctx context.Context) {
 	a.ctx = ctx
+	runtime.LogInfo(ctx, "App startup")
+	runtime.OnFileDrop(ctx, func(x, y int, paths []string) {
+		for _, p := range paths {
+			runtime.LogInfo(ctx, p)
+			stat, err := os.Stat(p)
+			if err != nil {
+				continue
+			}
+			if stat.IsDir() {
+				a.setFiles(p)
+			} else {
+				a.files = append(a.files, p)
+			}
+		}
+		a.setPreview()
+	})
+}
+
+func (a *App) shutdown(ctx context.Context) {
+	runtime.OnFileDropOff(ctx)
 }
 
 func NewApp() *App {
