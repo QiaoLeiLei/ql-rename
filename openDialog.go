@@ -52,11 +52,13 @@ func (a *App) setPreview() {
 	a.fileIndex = 0
 	for i := range a.files {
 		filePath := a.files[i]
-		onPreview := RenamePreview{
-			oldName: filePath,
-			newName: a.getNewFileName(filePath),
+		onePreview := RenamePreview{
+			oldDisPlayName: path.Base(filePath),
+			oldName:        filePath,
+			newName:        a.getNewFileName(filePath),
 		}
-		a.preview = append(a.preview, onPreview)
+		onePreview.newDisPlayName = path.Base(onePreview.newName)
+		a.preview = append(a.preview, onePreview)
 	}
 	a.fileIndex = 0
 }

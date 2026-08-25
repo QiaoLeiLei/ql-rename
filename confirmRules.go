@@ -1,5 +1,7 @@
 package main
 
+import "path"
+
 // SetRules 设置重命名规则
 func (a *App) SetRules(rules *Rules) {
 	a.rules = rules
@@ -22,6 +24,7 @@ func (a *App) updatePreview() {
 	a.fileIndex = 0
 	for i := range a.preview {
 		a.preview[i].newName = a.getNewFileName(a.preview[i].oldName)
+		a.preview[i].newDisPlayName = path.Base(a.preview[i].newName)
 	}
 	a.fileIndex = 0
 }

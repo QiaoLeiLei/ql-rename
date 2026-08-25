@@ -44,8 +44,10 @@ type Rules struct {
 	numberObj  *NumberObj
 }
 type RenamePreview struct {
-	oldName string
-	newName string
+	oldDisPlayName string
+	newDisPlayName string
+	oldName        string
+	newName        string
 }
 
 // App struct
