@@ -1,9 +1,14 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-let fileCount = ref(0);
-let selectedCount = ref(0);
-let files = ref<string[]>([]);
-files.value = ["test.txt", "test1.txt", "test2.txt"];
+import {onMounted, onUnmounted} from 'vue'
+import {dataCenter} from "../dataCenter";
+
+onMounted(() => {
+  console.log("onMounted")
+})
+onUnmounted(() => {
+  console.log('onUnmounted')
+})
+dataCenter.preview.map((item) => item.OldDisPlayName)
 </script>
 
 <template>
@@ -17,14 +22,14 @@ files.value = ["test.txt", "test1.txt", "test2.txt"];
     </div>
 
     <section class="list-section">
-      <div class="file-item" v-for="file in files">
-        {{ file}}
+      <div class="file-item" v-for="previewData in dataCenter.preview">
+        {{ previewData.OldDisPlayName }}
       </div>
     </section>
 
     <div class="files-statistics">
-      <p class="file-count">共 {{ fileCount }} 个文件</p>
-      <p class="selected-count">已选 {{ selectedCount }} 个文件</p>
+      <p class="file-count">共 {{ dataCenter.preview.length }} 个文件</p>
+      <p class="selected-count">已选 {{ dataCenter.preview.length }} 个文件</p>
     </div>
   </div>
 </template>

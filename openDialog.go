@@ -5,6 +5,7 @@ import (
 	"github.com/wailsapp/wails/v2/pkg/runtime"
 	"os"
 	"path"
+	"ql-rename/backend"
 )
 
 // OpenMultipleFilesDialog 显示打开文件对话框，返回选择的文件路径
@@ -61,4 +62,9 @@ func (a *App) setPreview() {
 		a.preview = append(a.preview, onePreview)
 	}
 	a.fileIndex = 0
+	a.notifyPreviewUpdate()
+}
+
+func (a *App) notifyPreviewUpdate() {
+	runtime.EventsEmit(a.ctx, backend.EventDataUpdate)
 }
