@@ -18,7 +18,7 @@ import {importFiles,importFolder} from "../composables/userImportFiles";
       <p class="description">支持添加前/后缀、替换指定字符串、按序号重命名、大小写转换、删除非法字符</p>
     </section>
     <section class="main-section" v-else>
-      <div class="header">批量重命名工具</div>
+      <h1 class="header">批量重命名工具</h1>
       <section class="file-section">
         <FilesList/>
         <RulesView/>
@@ -94,7 +94,8 @@ import {importFiles,importFolder} from "../composables/userImportFiles";
   padding: 5px 0;
   font-weight: bold;
   box-shadow: 0 2px 10px #000000;
-  margin-bottom: 10px;
+  margin-top: 0;
+  margin-bottom: 8px;
 }
 
 .file-section {
