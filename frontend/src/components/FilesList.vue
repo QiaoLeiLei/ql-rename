@@ -1,14 +1,6 @@
 <script setup lang="ts">
-import {onMounted, onUnmounted} from 'vue'
+import {importFiles,importFolder} from "../composables/userImportFiles";
 import {dataCenter} from "../dataCenter";
-
-onMounted(() => {
-  console.log("onMounted")
-})
-onUnmounted(() => {
-  console.log('onUnmounted')
-})
-dataCenter.preview.map((item) => item.OldDisPlayName)
 </script>
 
 <template>
@@ -16,8 +8,8 @@ dataCenter.preview.map((item) => item.OldDisPlayName)
     <div class="title">
       <p>文件列表</p>
       <div class="btn-title">
-        <button class="btn-file-title">导入文件</button>
-        <button class="btn-folder-title">导入文件夹</button>
+        <button class="btn btn-file-title" @click="importFiles">导入文件</button>
+        <button class="btn btn-folder-title" @click="importFolder">导入文件夹</button>
       </div>
     </div>
 
@@ -50,8 +42,24 @@ dataCenter.preview.map((item) => item.OldDisPlayName)
   justify-content: space-between;
   font-size: 1.2rem;
   font-weight: bold;
-  padding: 10px;
+  padding: 3px;
   border: 2px solid lightcyan;
+}
+
+.btn {
+  margin: 5px;
+  width: 80px;
+  height:30px;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: rgb(83,67,71);
+}
+
+.btn:hover {
+  background-color: rgb(83,67,71);
+  color: #fff;
 }
 
 .list-section {
