@@ -61,6 +61,7 @@ func (a *App) setPreview() {
 			OldDisPlayName: path.Base(filePath),
 			OldName:        filePath,
 			NewName:        a.getNewFileName(filePath),
+			Selected:       true,
 		}
 		onePreview.NewDisPlayName = path.Base(onePreview.NewName)
 		a.preview = append(a.preview, onePreview)
