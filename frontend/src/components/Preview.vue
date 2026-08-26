@@ -22,10 +22,16 @@ let newNames = ref<string[]>([]);
 
 <style scoped>
 .preview {
-  flex: 1;
-  width: 30%;
-  height: 100%;
-  background-color: #5d831b;
+  width: 26%;
+  height: calc(100% - 18px);
+  background-color: rgb(36, 44, 61);
+  border-radius: 15px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  margin-right: 6px;
+  display: flex;
+  overflow: hidden;
+  flex-flow: column nowrap;
+  justify-content: space-between;
 }
 
 .preview-title{
@@ -36,7 +42,6 @@ let newNames = ref<string[]>([]);
   font-size: 1.2rem;
   font-weight: bold;
   padding: 10px;
-  border: 2px solid lightcyan;
 }
 
 .preview-description{

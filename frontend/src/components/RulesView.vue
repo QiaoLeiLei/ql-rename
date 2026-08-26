@@ -22,9 +22,10 @@
 
 <style scoped>
 .rules-view {
-  flex: 1;
-  width: 30%;
-  height: 100%;
-  background-color: #9c6423;
+  width: 43%;
+  height: calc(100% - 18px);
+  background-color: rgb(36, 44, 61);
+  border-radius: 15px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 </style>

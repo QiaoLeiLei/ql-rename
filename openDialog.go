@@ -18,6 +18,7 @@ func (a *App) OpenMultipleFilesDialog() {
 		return
 	}
 	runtime.LogInfo(a.ctx, fmt.Sprintf("OpenMultipleFilesDialog: %v", filesPath))
+	a.files = []string{}
 	a.files = append(a.files, filesPath...)
 	a.setPreview()
 }
@@ -35,6 +36,7 @@ func (a *App) OpenDirectoryDialog() {
 }
 
 func (a *App) setFiles(dirPath string) {
+	a.files = []string{}
 	files, err := os.ReadDir(dirPath)
 	if err != nil {
 		runtime.LogError(a.ctx, err.Error())
@@ -44,12 +46,14 @@ func (a *App) setFiles(dirPath string) {
 		if f.IsDir() {
 			continue
 		}
+
 		fileName := path.Join(dirPath, f.Name())
 		a.files = append(a.files, fileName)
 	}
 }
 
 func (a *App) setPreview() {
+	a.preview = []RenamePreview{}
 	a.fileIndex = 0
 	for i := range a.files {
 		filePath := a.files[i]

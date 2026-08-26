@@ -17,9 +17,8 @@ func main() {
 
 	// Create application with options
 	err := wails.Run(&options.App{
-		Title:  "qi-rename",
 		Width:  1024,
-		Height: 768,
+		Height: 576,
 		AssetServer: &assetserver.Options{
 			Assets: assets,
 		},

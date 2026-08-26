@@ -50,6 +50,7 @@ type RenamePreview struct {
 	NewDisPlayName string
 	OldName        string
 	NewName        string
+	Selected       bool
 }
 
 // App struct

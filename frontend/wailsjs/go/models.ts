@@ -19,6 +19,7 @@ export namespace main {
 	    NewDisPlayName: string;
 	    OldName: string;
 	    NewName: string;
+	    Selected: boolean;
 	
 	    static createFrom(source: any = {}) {
 	        return new RenamePreview(source);
@@ -30,6 +31,7 @@ export namespace main {
 	        this.NewDisPlayName = source["NewDisPlayName"];
 	        this.OldName = source["OldName"];
 	        this.NewName = source["NewName"];
+	        this.Selected = source["Selected"];
 	    }
 	}
 	export class ReplaceObj {
