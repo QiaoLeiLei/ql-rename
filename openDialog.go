@@ -46,6 +46,18 @@ func (a *App) OpenDirectoryDialog() {
 }
 
 func (a *App) showDialog(s string, errors []error) {
+	if goruntime.GOOS == "windows" {
+		result, _ := runtime.MessageDialog(a.ctx, runtime.MessageDialogOptions{
+			Type:          runtime.QuestionDialog,
+			Title:         s,
+			Message:       "是否打开文件所在的文件夹？",
+			DefaultButton: "Yes",
+		})
+		if result == "Yes" || result == "Ok" {
+			a.OpenInFinder(a.files[0])
+		}
+		return
+	}
 	selected, _ := runtime.MessageDialog(a.ctx, runtime.MessageDialogOptions{
 		Title:         s,
 		Message:       fmt.Sprintf("共重命名 %d 个文件", len(a.files)),
