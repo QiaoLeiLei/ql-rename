@@ -112,6 +112,7 @@ function onRuleChange(rule: number) {
   background-color: rgb(36, 44, 61);
   border-radius: 15px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
 }
 
 .title {
