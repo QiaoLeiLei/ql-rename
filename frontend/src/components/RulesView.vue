@@ -62,10 +62,25 @@ function onRuleChange(rule: number) {
         <p>安顺序编号</p>
       </section>
       <section id="tab5-content" class="tab-content" v-if="currentRule === 5">
-        <p>大小写转换</p>
+        <p>将文件名转换为大小写/小写</p>
+        <select v-model="dataCenter.rules.ToUpperCase">
+          <option value="0" selected>转小写</option>
+          <option value="1">转大写</option>
+        </select>
+        <div class="description" v-if="dataCenter.rules.ToUpperCase">
+          <p>例如：<br><br>原文件名： "abc.txt"<br>转换为大写： "ABC.txt"<br>重命名结果为： "ABC.txt"</p>
+        </div>
+        <div class="description" v-else>
+          <p>例如：<br><br>原文件名： "ABC.txt"<br>转换为小写： "abc.txt"<br>重命名结果为： "abc.txt"</p>
+        </div>
       </section>
       <section id="tab6-content" class="tab-content" v-if="currentRule === 6">
-        <p>删除非法字符</p>
+        <p>删除文件名中的非法字符</p>
+        <div class="description">
+          <p class="tips"><span style="color: lightcoral;"> * </span><em>只保留文件名中的汉字、字母、数字、下划线、连字符</em></p>
+          <br>
+          <p>例如：<br><br>原文件名： "a_ b-@&c记录.txt"<br>重命名结果为： "a_b-c记录.txt"</p>
+        </div>
       </section>
     </div>
   </div>
@@ -127,4 +142,27 @@ input[type="text"] {
   outline: 2px solid #2b85e4;
   margin: 10px;
 }
+
+select {
+  background-color: rgb(36, 44, 61);
+  border: none;
+  color: #fff;
+  height: 30px;
+  width: 150px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  outline: 2px solid #2b85e4;
+  margin-top: 10px;
+  text-align: center;
+  text-align-last: center;
+}
+
+option {
+  text-align: center;
+}
+
+.tips {
+  font-size: 0.7rem;
+}
+
 </style>
