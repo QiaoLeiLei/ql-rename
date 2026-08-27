@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import {dataCenter} from "../dataCenter";
+function confirmRename(): void {
+  console.log("[js:confirmRename]: 确认重命名");
+}
 </script>
 
 <template>
@@ -21,9 +24,12 @@ import {dataCenter} from "../dataCenter";
           <p>-></p>
           <p>{{ preview.NewDisPlayName }}</p>
         </div>
-
       </div>
     </section>
+
+    <div class="bottom">
+      <button class="btn btn-confirm" @click="confirmRename">确认重命名</button>
+    </div>
   </div>
 </template>
 
@@ -84,5 +90,29 @@ h2{
   flex-direction: row;
   justify-content: space-evenly;
   overflow: hidden;
+}
+
+.bottom {
+  height: 3rem;
+  text-align: right;
+  background-color: rgb(35, 41, 57);
+  border-top: 1px solid #515151;
+}
+
+.btn-confirm {
+  margin: 5px;
+  width: 100px;
+  height: 35px;
+  border: none;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  background-color: #2b85e4;
+  color: white;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.btn-confirm:hover {
+  background-color: rgb(30, 100, 170);
+  color: #fff;
 }
 </style>
