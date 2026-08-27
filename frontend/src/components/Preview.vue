@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import {dataCenter} from "../dataCenter";
+import { ExecsRename } from "../../wailsjs/go/main/App";
 function confirmRename(): void {
   console.log("[js:confirmRename]: 确认重命名");
+  ExecsRename().catch((err: Error) => {
+    console.error("[js:confirmRename]: 重命名失败", err);
+  });
 }
 </script>
 

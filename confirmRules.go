@@ -34,4 +34,5 @@ func (a *App) updatePreview() {
 		a.preview[i].NewDisPlayName = path.Base(a.preview[i].NewName)
 	}
 	a.fileIndex = 0
+	a.notifyPreviewUpdate()
 }

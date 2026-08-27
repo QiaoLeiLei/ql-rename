@@ -1,13 +1,24 @@
 <script setup lang="ts">
-import {ref} from "vue";
-import {dataCenter} from "../dataCenter";
-
-const currentRule = ref(1);
+import {dataCenter, initRules} from "../dataCenter";
+import {onMounted,watch} from "vue";
+import {SetRules} from "../../wailsjs/go/main/App";
 
 function onRuleChange(rule: number) {
-  console.log("[js:当前规则]:", rule)
-  currentRule.value = rule;
+  console.log("[js:onRuleChange]:", rule)
+  dataCenter.rules.RenameType = rule;
 }
+
+onMounted(() => {
+  console.log("[js:RulesView mounted]")
+  initRules().then(() => {
+    watch(dataCenter.rules, (newRules) => {
+      console.log("[js:watch rules]...")
+      SetRules(newRules).catch(() => {
+        console.log("[js:设置规则失败]")
+      })
+    });
+  })
+})
 </script>
 
 <template>
@@ -28,7 +39,7 @@ function onRuleChange(rule: number) {
       <label class="radio-label" for="tab6">非法字符</label>
     </div>
     <div id="all-content">
-      <section id="tab1-content" class="tab-content" v-if="currentRule === 1">
+      <section id="tab1-content" class="tab-content" v-if="dataCenter.rules.RenameType === 1">
         <p>给原文件名添加前缀</p>
         <label for="prefix">前缀: </label>
         <input type="text" id="prefix" v-model="dataCenter.rules.Prefix" placeholder="test_" required>
@@ -36,7 +47,7 @@ function onRuleChange(rule: number) {
           <p>例如：<br><br>原文件名： "123.txt"<br>输入前缀： "test_"<br>重命名结果为： "test_123.txt"</p>
         </div>
       </section>
-      <section id="tab2-content" class="tab-content" v-if="currentRule === 2">
+      <section id="tab2-content" class="tab-content" v-if="dataCenter.rules.RenameType === 2">
         <p>给原文件名添加后缀</p>
         <label for="suffix">后缀: </label>
         <input type="text" id="suffix" v-model="dataCenter.rules.Suffix" placeholder="test_" required>
@@ -44,7 +55,7 @@ function onRuleChange(rule: number) {
           <p>例如：<br><br>原文件名： "123.txt"<br>输入后缀： "_test"<br>重命名结果为： "123_test.txt"</p>
         </div>
       </section>
-      <section id="tab3-content" class="tab-content" v-if="currentRule === 3">
+      <section id="tab3-content" class="tab-content" v-if="dataCenter.rules.RenameType === 3">
         <p>查找替换指定字符串</p>
         <div>
           <label for="oldStr">查找字符串: </label>
@@ -58,7 +69,7 @@ function onRuleChange(rule: number) {
           <p>例如：<br><br>原文件名： "123.txt"<br>查找字符串： "123"<br>替换字符串： "456"<br>重命名结果为： "456.txt"</p>
         </div>
       </section>
-      <section id="tab4-content" class="tab-content" v-if="currentRule === 4">
+      <section id="tab4-content" class="tab-content" v-if="dataCenter.rules.RenameType === 4">
         <p>按文件名顺序编号</p>
         <div class="suffix-select">
           <label class="title">选择模板：</label>
@@ -80,7 +91,7 @@ function onRuleChange(rule: number) {
           </br>重命名结果为： "文件名.txt"、"文件名_1.txt"</p>
         </div>
       </section>
-      <section id="tab5-content" class="tab-content" v-if="currentRule === 5">
+      <section id="tab5-content" class="tab-content" v-if="dataCenter.rules.RenameType === 5">
         <p>将文件名转换为大小写/小写</p>
         <select v-model="dataCenter.rules.ToUpperCase">
           <option :value="false">转小写</option>
@@ -93,7 +104,7 @@ function onRuleChange(rule: number) {
           <p>例如：<br><br>原文件名： "ABC.txt"<br>重命名结果为： "abc.txt"</p>
         </div>
       </section>
-      <section id="tab6-content" class="tab-content" v-if="currentRule === 6">
+      <section id="tab6-content" class="tab-content" v-if="dataCenter.rules.RenameType === 6">
         <p>删除文件名中的非法字符</p>
         <div class="description">
           <p class="tips"><span style="color: lightcoral;"> * </span><em>只保留文件名中的汉字、字母、数字、下划线、连字符</em></p>

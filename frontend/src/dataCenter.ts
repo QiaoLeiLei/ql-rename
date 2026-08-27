@@ -1,4 +1,4 @@
-import {reactive} from "vue";
+import {reactive,ref} from "vue";
 import {main} from "../wailsjs/go/models";
 import {EventsOn} from "../wailsjs/runtime";
 import {Events} from "./events.gen";
@@ -11,12 +11,14 @@ export const dataCenter = reactive({
 
 EventsOn(Events.EventDataUpdate, () => {
   console.log("EventDataUpdate")
-  refreshData().catch((err) => console.error(err))
+  refreshPreview().catch((err) => console.error(err))
 })
 
-async function refreshData(): Promise<void> {
-  dataCenter.preview = await GetPreview()
+export async function initRules(): Promise<void> {
   dataCenter.rules = await GetRules()
-  return Promise.resolve()
+}
+
+async function refreshPreview(): Promise<void> {
+  dataCenter.preview = await GetPreview()
 }
 

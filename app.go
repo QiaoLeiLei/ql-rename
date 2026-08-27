@@ -102,7 +102,7 @@ func NewApp() *App {
 				NewStr: "",
 			},
 			NumberObj: &NumberObj{
-				NewName: "",
+				NewName: "xxx",
 				Suffix:  bracket,
 			},
 			ToUpperCase: false,
