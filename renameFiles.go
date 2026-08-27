@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
-	"path"
+	"path/filepath"
 	"regexp"
 	"strings"
 )
@@ -55,16 +55,16 @@ func (a *App) resetData() {
 }
 
 func (a *App) addFilePrefix(filePath string, prefix string) string {
-	dir, file := path.Split(filePath)
-	newPath := path.Join(dir, prefix+file)
+	dir, file := filepath.Split(filePath)
+	newPath := filepath.Join(dir, prefix+file)
 	return newPath
 }
 
 func (a *App) addFileSuffix(filePath string, suffix string) string {
-	dir, file := path.Split(filePath)
-	ext := path.Ext(file)
+	dir, file := filepath.Split(filePath)
+	ext := filepath.Ext(file)
 	file = strings.ReplaceAll(file, ext, "")
-	newPath := path.Join(dir, file+suffix+ext)
+	newPath := filepath.Join(dir, file+suffix+ext)
 	return newPath
 }
 
@@ -72,17 +72,17 @@ func (a *App) replaceFileStr(filePath string, obj *ReplaceObj) string {
 	if obj == nil {
 		return filePath
 	}
-	dir, file := path.Split(filePath)
-	ext := path.Ext(file)
+	dir, file := filepath.Split(filePath)
+	ext := filepath.Ext(file)
 	file = strings.ReplaceAll(file, ext, "")
 	file = strings.ReplaceAll(file, obj.OldStr, obj.NewStr)
-	newPath := path.Join(dir, file+ext)
+	newPath := filepath.Join(dir, file+ext)
 	return newPath
 }
 
 func (a *App) addFileNumber(filePath string, numberObj *NumberObj) string {
-	dir, file := path.Split(filePath)
-	ext := path.Ext(file)
+	dir, file := filepath.Split(filePath)
+	ext := filepath.Ext(file)
 	suffix := ""
 	if a.fileIndex != 0 {
 		if numberObj.Suffix == bracket {
@@ -93,7 +93,7 @@ func (a *App) addFileNumber(filePath string, numberObj *NumberObj) string {
 		}
 	}
 	a.fileIndex++
-	newPath := path.Join(dir, numberObj.NewName+suffix+ext)
+	newPath := filepath.Join(dir, numberObj.NewName+suffix+ext)
 	return newPath
 }
 
@@ -105,31 +105,31 @@ func (a *App) changeUpperLower(filePath string) string {
 }
 
 func (a *App) fileToUpperCase(filePath string) string {
-	dir, file := path.Split(filePath)
-	ext := path.Ext(file)
+	dir, file := filepath.Split(filePath)
+	ext := filepath.Ext(file)
 	file = strings.ReplaceAll(file, ext, "")
 	file = strings.ToUpper(file)
-	newPath := path.Join(dir, file+ext)
+	newPath := filepath.Join(dir, file+ext)
 	return newPath
 }
 
 func (a *App) fileToLowerCase(filePath string) string {
-	dir, file := path.Split(filePath)
-	ext := path.Ext(file)
+	dir, file := filepath.Split(filePath)
+	ext := filepath.Ext(file)
 	file = strings.ReplaceAll(file, ext, "")
 	file = strings.ToLower(file)
-	newPath := path.Join(dir, file+ext)
+	newPath := filepath.Join(dir, file+ext)
 	return newPath
 }
 
 func (a *App) deleteFileSpecialChars(filePath string) string {
 	// 删除特殊字符 保留汉字数字字母下划线中英文括号短横线
 	pattern := regexp.MustCompile(`[^0-9a-zA-Z_\x{4e00}-\x{9fa5}()（）\-]`)
-	dir, file := path.Split(filePath)
-	ext := path.Ext(file)
+	dir, file := filepath.Split(filePath)
+	ext := filepath.Ext(file)
 	file = strings.ReplaceAll(file, ext, "")
 	file = pattern.ReplaceAllString(file, "")
-	newPath := path.Join(dir, file+ext)
+	newPath := filepath.Join(dir, file+ext)
 	return newPath
 }
 

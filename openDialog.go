@@ -5,7 +5,6 @@ import (
 	"github.com/wailsapp/wails/v2/pkg/runtime"
 	"os"
 	"os/exec"
-	"path"
 	"path/filepath"
 	"ql-rename/backend"
 	goruntime "runtime"
@@ -40,7 +39,7 @@ func (a *App) OpenDirectoryDialog() {
 	}
 	runtime.LogInfo(a.ctx, fmt.Sprintf("OpenDirectoryDialog: %v", dirPath))
 
-	if dirPath == "" {
+	if dirPath != "" {
 		a.setFiles(dirPath)
 		a.setPreview()
 	}
@@ -92,7 +91,7 @@ func (a *App) setFiles(dirPath string) {
 			continue
 		}
 
-		fileName := path.Join(dirPath, f.Name())
+		fileName := filepath.Join(dirPath, f.Name())
 		a.files = append(a.files, fileName)
 	}
 }
@@ -103,12 +102,12 @@ func (a *App) setPreview() {
 	for i := range a.files {
 		filePath := a.files[i]
 		onePreview := RenamePreview{
-			OldDisPlayName: path.Base(filePath),
+			OldDisPlayName: filepath.Base(filePath),
 			OldName:        filePath,
 			NewName:        a.getNewFileName(filePath),
 			Selected:       true,
 		}
-		onePreview.NewDisPlayName = path.Base(onePreview.NewName)
+		onePreview.NewDisPlayName = filepath.Base(onePreview.NewName)
 		a.preview = append(a.preview, onePreview)
 	}
 	a.fileIndex = 0
