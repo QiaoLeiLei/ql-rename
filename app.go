@@ -18,8 +18,7 @@ const (
 	AddSuffix                                // 添加后缀
 	ReplaceStr                               // 替换字符串
 	AddNumber                                // 添加数字序号
-	ToUpperCase                              // 转换为大写
-	ToLowerCase                              // 转换为小写
+	ChangeUpperLower                         // 转换为大小写
 	DeleteSpecialChars                       // 删除特殊字符
 )
 
@@ -39,11 +38,12 @@ type NumberObj struct {
 }
 
 type Rules struct {
-	RenameType RenameType
-	Prefix     string
-	Suffix     string
-	ReplaceObj *ReplaceObj
-	NumberObj  *NumberObj
+	RenameType  RenameType
+	Prefix      string
+	Suffix      string
+	ReplaceObj  *ReplaceObj
+	NumberObj   *NumberObj
+	ToUpperCase bool
 }
 type RenamePreview struct {
 	OldDisPlayName string
@@ -94,7 +94,7 @@ func (a *App) shutdown(ctx context.Context) {
 func NewApp() *App {
 	return &App{
 		rules: &Rules{
-			RenameType: ToUpperCase,
+			RenameType: AddPrefix,
 			Prefix:     "",
 			Suffix:     "",
 			ReplaceObj: &ReplaceObj{
@@ -102,9 +102,10 @@ func NewApp() *App {
 				NewStr: "",
 			},
 			NumberObj: &NumberObj{
-				NewName: "新名字",
+				NewName: "",
 				Suffix:  bracket,
 			},
+			ToUpperCase: false,
 		},
 		wg: &sync.WaitGroup{},
 	}

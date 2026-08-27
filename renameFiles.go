@@ -88,6 +88,13 @@ func (a *App) addFileNumber(filePath string, numberObj *NumberObj) string {
 	return newPath
 }
 
+func (a *App) changeUpperLower(filePath string) string {
+	if a.rules.ToUpperCase {
+		return a.fileToUpperCase(filePath)
+	}
+	return a.fileToLowerCase(filePath)
+}
+
 func (a *App) fileToUpperCase(filePath string) string {
 	dir, file := path.Split(filePath)
 	ext := path.Ext(file)
@@ -129,10 +136,8 @@ func (a *App) getNewFileName(filePath string) string {
 		return a.replaceFileStr(filePath, rules.ReplaceObj)
 	case AddNumber:
 		return a.addFileNumber(filePath, rules.NumberObj)
-	case ToUpperCase:
-		return a.fileToUpperCase(filePath)
-	case ToLowerCase:
-		return a.fileToLowerCase(filePath)
+	case ChangeUpperLower:
+		return a.changeUpperLower(filePath)
 	case DeleteSpecialChars:
 		return a.deleteFileSpecialChars(filePath)
 	default:

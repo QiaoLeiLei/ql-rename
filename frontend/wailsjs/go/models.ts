@@ -54,6 +54,7 @@ export namespace main {
 	    Suffix: string;
 	    ReplaceObj?: ReplaceObj;
 	    NumberObj?: NumberObj;
+	    ToUpperCase: boolean;
 	
 	    static createFrom(source: any = {}) {
 	        return new Rules(source);
@@ -66,6 +67,7 @@ export namespace main {
 	        this.Suffix = source["Suffix"];
 	        this.ReplaceObj = this.convertValues(source["ReplaceObj"], ReplaceObj);
 	        this.NumberObj = this.convertValues(source["NumberObj"], NumberObj);
+	        this.ToUpperCase = source["ToUpperCase"];
 	    }
 	
 		convertValues(a: any, classs: any, asMap: boolean = false): any {
