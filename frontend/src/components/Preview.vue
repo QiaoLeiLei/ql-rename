@@ -18,7 +18,7 @@ function confirmRename(): void {
     </div>
 
     <section class="preview-content">
-      <div v-for="(preview, index) in dataCenter.preview" :key="index" class="preview-item">
+      <div v-for="(preview, index) in dataCenter.preview" :key="index" class="preview-item" :class="{'is-selected': preview.Selected}">
         <div class="item">
           <p>{{ preview.OldDisPlayName }}</p>
           <p>-></p>
@@ -78,18 +78,30 @@ h2{
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-top:-0.5rem;
   width: 100%;
+  overflow-y: scroll;
 }
+
 .preview-item{
-  height: 1.5rem;
+  height: auto;
   width: 100%;
+  margin: 2px 0;
+  align-items: center;
 }
+
+.preview-item.is-selected{
+  background-color: rgba(43, 133, 228, 0.25);
+  font-weight: bold;
+}
+
 .item{
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   overflow: hidden;
+  font-weight: lighter;
+  font-size: 0.8rem;
+  margin: -0.5rem auto;
 }
 
 .bottom {
