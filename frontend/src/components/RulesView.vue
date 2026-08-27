@@ -74,8 +74,8 @@ onMounted(() => {
         <div class="suffix-select">
           <label class="title">选择模板：</label>
           <select v-model="dataCenter.rules.NumberObj!.Suffix!">
-            <option value="1" selected>xxx(序号)</option>
-            <option value="2">xxx_序号</option>
+            <option :value="1" selected>xxx(序号)</option>
+            <option :value="2">xxx_序号</option>
           </select>
         </div>
         <div class="input-new-name">

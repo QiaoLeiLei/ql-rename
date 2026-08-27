@@ -36,13 +36,22 @@ func (a *App) renameFiles() error {
 	for err := range errChan {
 		errors = append(errors, err)
 	}
+	a.resetData()
+	a.showDialog("重命名完成", errors)
 
 	// 如果有错误，返回组合错误
 	if len(errors) > 0 {
 		return fmt.Errorf("文件重命名过程中发生 %d 个错误: %v", len(errors), errors)
 	}
-
 	return nil
+}
+
+func (a *App) resetData() {
+	a.files = []string{}
+	for _, preview := range a.preview {
+		a.files = append(a.files, preview.NewName)
+	}
+	a.setPreview()
 }
 
 func (a *App) addFilePrefix(filePath string, prefix string) string {

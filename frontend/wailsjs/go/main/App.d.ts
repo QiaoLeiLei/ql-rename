@@ -12,6 +12,8 @@ export function Greet(arg1:string):Promise<string>;
 
 export function OpenDirectoryDialog():Promise<void>;
 
+export function OpenInFinder(arg1:string):Promise<void>;
+
 export function OpenMultipleFilesDialog():Promise<void>;
 
 export function SetRules(arg1:main.Rules):Promise<void>;

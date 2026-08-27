@@ -22,6 +22,10 @@ export function OpenDirectoryDialog() {
   return window['go']['main']['App']['OpenDirectoryDialog']();
 }
 
+export function OpenInFinder(arg1) {
+  return window['go']['main']['App']['OpenInFinder'](arg1);
+}
+
 export function OpenMultipleFilesDialog() {
   return window['go']['main']['App']['OpenMultipleFilesDialog']();
 }

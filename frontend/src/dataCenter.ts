@@ -1,4 +1,4 @@
-import {reactive,ref} from "vue";
+import {reactive} from "vue";
 import {main} from "../wailsjs/go/models";
 import {EventsOn} from "../wailsjs/runtime";
 import {Events} from "./events.gen";
