@@ -21,6 +21,11 @@ func (a *App) OpenMultipleFilesDialog() {
 		return
 	}
 	runtime.LogInfo(a.ctx, fmt.Sprintf("OpenMultipleFilesDialog: %v", filesPath))
+
+	if len(filesPath) == 0 {
+		return
+	}
+
 	a.files = []string{}
 	a.files = append(a.files, filesPath...)
 	a.setPreview()
@@ -34,8 +39,11 @@ func (a *App) OpenDirectoryDialog() {
 		return
 	}
 	runtime.LogInfo(a.ctx, fmt.Sprintf("OpenDirectoryDialog: %v", dirPath))
-	a.setFiles(dirPath)
-	a.setPreview()
+
+	if dirPath == "" {
+		a.setFiles(dirPath)
+		a.setPreview()
+	}
 }
 
 func (a *App) showDialog(s string, errors []error) {
