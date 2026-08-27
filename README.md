@@ -1,16 +1,9 @@
 # ql-rename
 批量重命名文件
 
+## 事件定义
 Event Name 在 frontend/src/events.gen.ts 中定义
 然后执行 go generate ./backend 生成前端用的事件定义events.gen.ts
-
-
-## About
-
-This is the official Wails Vue-TS template.
-
-You can configure the project by editing `wails.json`. More information about the project settings can be found
-here: https://wails.io/docs/reference/project-config
 
 ## Live Development
 
@@ -22,4 +15,7 @@ to this in your browser, and you can call your Go code from devtools.
 ## Building
 
 To build a redistributable, production mode package, use `wails build`.
-
+### 构建 Windows AMD64 版本
+wails build -clean -platform windows/amd64
+### 构建 Windows ARM64 版本
+wails build -clean -platform windows/arm64
