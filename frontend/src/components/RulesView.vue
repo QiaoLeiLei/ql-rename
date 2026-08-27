@@ -59,19 +59,38 @@ function onRuleChange(rule: number) {
         </div>
       </section>
       <section id="tab4-content" class="tab-content" v-if="currentRule === 4">
-        <p>安顺序编号</p>
+        <p>按文件名顺序编号</p>
+        <div class="suffix-select">
+          <label class="title">选择模板：</label>
+          <select v-model="dataCenter.rules.NumberObj!.Suffix!">
+            <option value="1" selected>xxx(序号)</option>
+            <option value="2">xxx_序号</option>
+          </select>
+        </div>
+        <div class="input-new-name">
+          <label for="newName">新文件名: </label>
+          <input type="text" id="newName" v-model="dataCenter.rules.NumberObj!.NewName" placeholder="文件名" />
+        </div>
+        <div class="description" v-if="dataCenter.rules.NumberObj!.Suffix! == 1">
+          <p>例如：<br><br>原文件名： "123.txt"、"456.txt"<br>
+          </br>重命名结果为： "文件名.txt"、"文件名(1).txt"</p>
+        </div>
+        <div class="description" v-else>
+          <p>例如：<br><br>原文件名： "123.txt"、"456.txt"<br>
+          </br>重命名结果为： "文件名.txt"、"文件名_1.txt"</p>
+        </div>
       </section>
       <section id="tab5-content" class="tab-content" v-if="currentRule === 5">
         <p>将文件名转换为大小写/小写</p>
         <select v-model="dataCenter.rules.ToUpperCase">
-          <option value="0" selected>转小写</option>
-          <option value="1">转大写</option>
+          <option :value="false">转小写</option>
+          <option :value="true">转大写</option>
         </select>
-        <div class="description" v-if="dataCenter.rules.ToUpperCase">
-          <p>例如：<br><br>原文件名： "abc.txt"<br>转换为大写： "ABC.txt"<br>重命名结果为： "ABC.txt"</p>
+        <div class="description" v-show="dataCenter.rules.ToUpperCase">
+          <p>例如：<br><br>原文件名： "abc.txt"<br>重命名结果为： "ABC.txt"</p>
         </div>
-        <div class="description" v-else>
-          <p>例如：<br><br>原文件名： "ABC.txt"<br>转换为小写： "abc.txt"<br>重命名结果为： "abc.txt"</p>
+        <div class="description" v-show="!dataCenter.rules.ToUpperCase">
+          <p>例如：<br><br>原文件名： "ABC.txt"<br>重命名结果为： "abc.txt"</p>
         </div>
       </section>
       <section id="tab6-content" class="tab-content" v-if="currentRule === 6">
