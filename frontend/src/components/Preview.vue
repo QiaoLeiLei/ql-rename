@@ -39,7 +39,7 @@ function confirmRename(): void {
 
 <style scoped>
 .preview {
-  width: 26%;
+  width: 32%;
   height: calc(100% - 18px);
   background-color: rgb(36, 44, 61);
   border-radius: 15px;
@@ -83,7 +83,7 @@ h2{
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
-  overflow-y: scroll;
+  overflow: hidden;
 }
 
 .preview-item{

@@ -38,7 +38,7 @@ const selectedCount = ref(0);
 
 <style scoped>
 #files-list {
-  width: 26%;
+  width: 20%;
   height: calc(100% - 18px);
   background-color: rgb(36, 44, 61);
   border-radius: 15px;
