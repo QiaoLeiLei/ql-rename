@@ -1,10 +1,6 @@
 # ql-rename
 批量重命名文件
 
-## 事件定义
-Event Name 在 frontend/src/events.gen.ts 中定义
-然后执行 go generate ./backend 生成前端用的事件定义events.gen.ts
-
 ## Live Development
 
 To run in live development mode, run `wails dev` in the project directory. This will run a Vite development

@@ -6,7 +6,6 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
-	"ql-rename/backend"
 	goruntime "runtime"
 )
 
@@ -127,5 +126,5 @@ func (a *App) setPreview() {
 }
 
 func (a *App) notifyPreviewUpdate() {
-	runtime.EventsEmit(a.ctx, backend.EventDataUpdate)
+	runtime.EventsEmit(a.ctx, string(EventDataUpdate))
 }

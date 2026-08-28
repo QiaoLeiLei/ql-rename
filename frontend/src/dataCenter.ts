@@ -1,7 +1,6 @@
 import {reactive} from "vue";
 import {main} from "../wailsjs/go/models";
 import {EventsOn} from "../wailsjs/runtime";
-import {Events} from "./events.gen";
 import {GetPreview,GetRules} from "../wailsjs/go/main/App";
 
 export const dataCenter = reactive({
@@ -9,8 +8,8 @@ export const dataCenter = reactive({
   preview: [] as Array<main.RenamePreview>,
 });
 
-EventsOn(Events.EventDataUpdate, () => {
-  console.log("EventDataUpdate")
+EventsOn(main.EventName.DATA_UPDATE, () => {
+  console.log("DATA_UPDATE")
   refreshPreview().catch((err) => console.error(err))
 })
 

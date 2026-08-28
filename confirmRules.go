@@ -1,6 +1,8 @@
 package main
 
-import "path/filepath"
+import (
+	"path/filepath"
+)
 
 // SetRules 设置重命名规则
 func (a *App) SetRules(rules *Rules) {

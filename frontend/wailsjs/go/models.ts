@@ -1,5 +1,8 @@
 export namespace main {
 	
+	export enum EventName {
+	    DATA_UPDATE = "data:update",
+	}
 	export class NumberObj {
 	    NewName: string;
 	    Suffix: number;
