@@ -34,6 +34,7 @@ func main() {
 		EnumBind: []interface{}{
 			Events,
 		},
+		Menu: app.getMenu(),
 	})
 
 	if err != nil {
