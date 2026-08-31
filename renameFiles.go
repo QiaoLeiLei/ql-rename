@@ -9,37 +9,14 @@ import (
 )
 
 func (a *App) renameFiles() error {
-	// 使用 channel 收集错误
-	errChan := make(chan error, len(a.preview))
-
-	for i := range a.preview {
-		a.wg.Add(1)
-		// 通过参数传递避免闭包变量捕获
-		go func(idx int) {
-			defer a.wg.Done()
-
-			oldName := a.preview[idx].OldName
-			newName := a.preview[idx].NewName
-
-			if err := os.Rename(oldName, newName); err != nil {
-				errChan <- fmt.Errorf("重命名文件 %s -> %s 失败: %w", oldName, newName, err)
-			}
-		}(i)
-	}
-
-	// 等待所有 goroutine 完成
-	a.wg.Wait()
-	close(errChan)
-
-	// 收集所有错误
 	var errors []error
-	for err := range errChan {
-		errors = append(errors, err)
+	for _, p := range a.preview {
+		if err := os.Rename(p.OldName, p.NewName); err != nil {
+			errors = append(errors, fmt.Errorf("重命名文件 %s -> %s 失败: %w", p.OldName, p.NewName, err))
+		}
 	}
 	a.resetData()
 	a.showDialog("重命名完成", errors)
-
-	// 如果有错误，返回组合错误
 	if len(errors) > 0 {
 		return fmt.Errorf("文件重命名过程中发生 %d 个错误: %v", len(errors), errors)
 	}
