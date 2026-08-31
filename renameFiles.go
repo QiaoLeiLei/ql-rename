@@ -63,7 +63,7 @@ func (a *App) addFilePrefix(filePath string, prefix string) string {
 func (a *App) addFileSuffix(filePath string, suffix string) string {
 	dir, file := filepath.Split(filePath)
 	ext := filepath.Ext(file)
-	file = strings.ReplaceAll(file, ext, "")
+	file = strings.TrimSuffix(file, ext)
 	newPath := filepath.Join(dir, file+suffix+ext)
 	return newPath
 }
@@ -74,7 +74,7 @@ func (a *App) replaceFileStr(filePath string, obj *ReplaceObj) string {
 	}
 	dir, file := filepath.Split(filePath)
 	ext := filepath.Ext(file)
-	file = strings.ReplaceAll(file, ext, "")
+	file = strings.TrimSuffix(file, ext)
 	file = strings.ReplaceAll(file, obj.OldStr, obj.NewStr)
 	newPath := filepath.Join(dir, file+ext)
 	return newPath
@@ -107,7 +107,7 @@ func (a *App) changeUpperLower(filePath string) string {
 func (a *App) fileToUpperCase(filePath string) string {
 	dir, file := filepath.Split(filePath)
 	ext := filepath.Ext(file)
-	file = strings.ReplaceAll(file, ext, "")
+	file = strings.TrimSuffix(file, ext)
 	file = strings.ToUpper(file)
 	newPath := filepath.Join(dir, file+ext)
 	return newPath
@@ -116,7 +116,7 @@ func (a *App) fileToUpperCase(filePath string) string {
 func (a *App) fileToLowerCase(filePath string) string {
 	dir, file := filepath.Split(filePath)
 	ext := filepath.Ext(file)
-	file = strings.ReplaceAll(file, ext, "")
+	file = strings.TrimSuffix(file, ext)
 	file = strings.ToLower(file)
 	newPath := filepath.Join(dir, file+ext)
 	return newPath
@@ -127,7 +127,7 @@ func (a *App) deleteFileSpecialChars(filePath string) string {
 	pattern := regexp.MustCompile(`[^0-9a-zA-Z_\x{4e00}-\x{9fa5}()（）\-]`)
 	dir, file := filepath.Split(filePath)
 	ext := filepath.Ext(file)
-	file = strings.ReplaceAll(file, ext, "")
+	file = strings.TrimSuffix(file, ext)
 	file = pattern.ReplaceAllString(file, "")
 	newPath := filepath.Join(dir, file+ext)
 	return newPath
