@@ -6,10 +6,8 @@ import {ref} from "vue";
 function selectFile(index: number): void {
   console.log("[js:selectFile]:", index);
   dataCenter.preview[index].Selected = !dataCenter.preview[index].Selected;
-  selectedCount.value = dataCenter.preview.filter(previewData => previewData.Selected).length;
 }
 
-const selectedCount = ref(0);
 </script>
 
 <template>
@@ -31,7 +29,7 @@ const selectedCount = ref(0);
 
     <div class="files-statistics">
       <p class="selected-count"><img id="notice-icon" alt="notice icon" src="../assets/images/notice-white.svg"/>已选
-        {{ selectedCount }} 个文件</p>
+        {{ dataCenter.preview.filter(previewData => previewData.Selected).length }} 个文件</p>
     </div>
   </div>
 </template>

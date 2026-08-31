@@ -42,7 +42,7 @@ onMounted(() => {
       <section id="tab1-content" class="tab-content" v-if="dataCenter.rules.RenameType === 1">
         <p>给原文件名添加前缀</p>
         <label for="prefix">前缀: </label>
-        <input type="text" id="prefix" v-model="dataCenter.rules.Prefix" placeholder="test_" required>
+        <input type="text" id="prefix" v-model.lazy="dataCenter.rules.Prefix" placeholder="test_" required>
         <div class="description">
           <p>例如：<br><br>原文件名： "123.txt"<br>输入前缀： "test_"<br>重命名结果为： "test_123.txt"</p>
         </div>
@@ -50,7 +50,7 @@ onMounted(() => {
       <section id="tab2-content" class="tab-content" v-if="dataCenter.rules.RenameType === 2">
         <p>给原文件名添加后缀</p>
         <label for="suffix">后缀: </label>
-        <input type="text" id="suffix" v-model="dataCenter.rules.Suffix" placeholder="test_" required>
+        <input type="text" id="suffix" v-model.lazy="dataCenter.rules.Suffix" placeholder="_test" required>
         <div class="description">
           <p>例如：<br><br>原文件名： "123.txt"<br>输入后缀： "_test"<br>重命名结果为： "123_test.txt"</p>
         </div>
@@ -59,11 +59,11 @@ onMounted(() => {
         <p>查找替换指定字符串</p>
         <div>
           <label for="oldStr">查找字符串: </label>
-          <input type="text" id="oldStr" v-model="dataCenter.rules.ReplaceObj!.OldStr" placeholder="123" required>
+          <input type="text" id="oldStr" v-model.lazy="dataCenter.rules.ReplaceObj!.OldStr" placeholder="123" required>
         </div>
         <div>
           <label for="newStr">替换字符串: </label>
-          <input type="text" id="newStr" v-model="dataCenter.rules.ReplaceObj!.NewStr" placeholder="456" required>
+          <input type="text" id="newStr" v-model.lazy="dataCenter.rules.ReplaceObj!.NewStr" placeholder="456" required>
         </div>
        <div class="description">
           <p>例如：<br><br>原文件名： "123.txt"<br>查找字符串： "123"<br>替换字符串： "456"<br>重命名结果为： "456.txt"</p>
@@ -73,14 +73,14 @@ onMounted(() => {
         <p>按文件名顺序编号</p>
         <div class="suffix-select">
           <label class="title">选择模板：</label>
-          <select v-model="dataCenter.rules.NumberObj!.Suffix!">
+          <select v-model.lazy="dataCenter.rules.NumberObj!.Suffix!">
             <option :value="1" selected>xxx(序号)</option>
             <option :value="2">xxx_序号</option>
           </select>
         </div>
         <div class="input-new-name">
           <label for="newName">新文件名: </label>
-          <input type="text" id="newName" v-model="dataCenter.rules.NumberObj!.NewName" placeholder="文件名" />
+          <input type="text" id="newName" v-model.lazy="dataCenter.rules.NumberObj!.NewName" placeholder="文件名" />
         </div>
         <div class="description" v-if="dataCenter.rules.NumberObj!.Suffix! == 1">
           <p>例如：<br><br>原文件名： "123.txt"、"456.txt"<br>
@@ -93,7 +93,7 @@ onMounted(() => {
       </section>
       <section id="tab5-content" class="tab-content" v-if="dataCenter.rules.RenameType === 5">
         <p>将文件名转换为大小写/小写</p>
-        <select v-model="dataCenter.rules.ToUpperCase">
+        <select v-model.lazy="dataCenter.rules.ToUpperCase">
           <option :value="false">转小写</option>
           <option :value="true">转大写</option>
         </select>
